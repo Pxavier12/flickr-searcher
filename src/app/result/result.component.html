@@ -1,0 +1,203 @@
+<nav class="relative z-50 h-24 select-none tails-selected-element" x-data="{ showMenu: false }">
+  <div
+    class="fixed w-full bg-white shadow-2xl justify-around flex flex-wrap items-center h-16 font-medium border-b border-gray-200">
+    <div class="flex items-center  w-1/4 h-full pr-4">
+      <a href="#_" class="inline-block py-4 md:py-0">
+        <span class="p-1 text-xl font-black leading-none text-gray-900">flickr</span>
+      </a>
+    </div>
+    <form class=" inline-flex  space-y-0">
+      <div>
+        <form onkeydown="return event.key != 'Enter';">
+
+          <input type="search" class="form-control" (keyup)="search($event)" (keyup.enter)="search($event)"
+            id="&quot;form-subscribe-Subscribe"
+            class="rounded-l-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 text-base focus:outline-none focus:ring-2 focus:ring-stone-600 focus:border-transparent"
+            placeholder="search" />
+        </form>
+      </div>
+      <button (keyup.enter)="search($event)" type="button"
+        class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-black rounded-r-lg shadow-lg hover:bg-stone-700 focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2 focus:ring-offset-stone-200">
+        search
+      </button>
+    </form>
+  </div>
+</nav>
+
+<!-- 
+<div>
+  <div class="flex justify-items-end">
+    <div>
+      <button type="button"
+        class=" border border-gray-300 bg-white dark:bg-gray-800 shadow-sm flex items-center justify-center w-full rounded-md  px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-50 hover:bg-gray-50 dark:hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
+        id="options-menu">
+        Pay with
+        <svg width="20" height="20" fill="currentColor" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M1408 704q0 26-19 45l-448 448q-19 19-45 19t-45-19l-448-448q-19-19-19-45t19-45 45-19h896q26 0 45 19t19 45z">
+          </path>
+        </svg>
+      </button>
+    </div>
+    <div
+      class="absolute right-0 w-56 mt-2 origin-top-right bg-white rounded-md shadow-lg dark:bg-gray-800 ring-1 ring-black ring-opacity-5">
+      <div class="py-1 " role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+        <a href="#"
+          class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+          role="menuitem">
+          <span class="flex flex-col">
+            <span>
+              Stripe
+            </span>
+          </span>
+        </a>
+        <a href="#"
+          class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+          role="menuitem">
+          <span class="flex flex-col">
+            <span>
+              Mastercard
+            </span>
+          </span>
+        </a>
+        <a href="#"
+          class="block block px-4 py-2 text-md text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white dark:hover:bg-gray-600"
+          role="menuitem">
+          <span class="flex flex-col">
+            <span>
+              Paypal
+            </span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+
+
+<div *ngIf="showModal"
+  class="overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none justify-center items-center flex">
+  <div class="relative w-auto my-6 mx-auto max-w-6xl">
+    <!--content-->
+    <div class="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+      <!--header-->
+      <div class="flex items-start justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+        <h3 class="text-3xl font-semibold">
+          {{modalImage?.title}}
+        </h3>
+        <button
+          class="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+          (click)="toggleModal()">
+          <span class="bg-transparent text-black opacity-5 h-6 w-6 text-2xl block outline-none focus:outline-none">
+            ×
+          </span>
+        </button>
+      </div>
+      <!--body-->
+      <div class="relative p-6 flex-auto">
+        <div class="grid grid-cols-4 gap-4">
+          <div class="col-span-1">
+            <img class=" object-cover  mb-2 overflow-hidden rounded-lg shadow-xl transition-all "
+              src="{{modalImage.url}}_m.jpg">
+
+          </div>
+          <div class="col-span-3 overflow-auto  h-80">
+            <div class=" overflow-auto my-4">
+
+              <div class="container flex flex-col mx-auto p-6 items-center justify-center">
+                <ul class="flex flex-col">
+                  <div *ngIf="comments.length">
+                    <li class="border-gray-400 flex flex-row mb-2" *ngFor="let comment of comments">
+
+                      <div
+                        class="shadow border w-full select-none bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center p-4">
+                        <div class="flex flex-col w-10 h-10 justify-center items-center mr-4 ">
+                          <a class="block relative ">
+                            <img alt="profil"
+                              src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/unknown-512.png"
+                              class="mx-auto object-cover rounded-full h-10 w-10 " />
+                          </a>
+                        </div>
+                        <div class="flex-1 pl-1 md:mr-16">
+                          <div class="font-medium dark:text-white">
+                            {{comment.authorname}}
+                          </div>
+                          <div class="text-gray-600 dark:text-gray-200 text-sm">
+                            {{comment.comment}}
+                          </div>
+                        </div>
+                        <div class="text-gray-600 dark:text-gray-200 text-xs">
+                          {{comment.datecreate}}
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+
+
+
+                  <div *ngIf="!comments.length">
+                    <li class="border-gray-400 flex flex-row mb-2">
+
+                      <div
+                        class="shadow border w-full select-none bg-white dark:bg-gray-800 rounded-md flex flex-1 items-center p-4">
+
+                        <div class="flex-1 pl-1 md:mr-16">
+                          <div class="font-medium dark:text-white">
+                            No comments .
+                          </div>
+
+                        </div>
+                      </div>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      <!--footer-->
+      <div class="flex items-center justify-end p-6 border-t border-solid border-slate-200 rounded-b">
+
+        <a href="{{modalImage.url}}_b.jpg" target="_blank">
+
+          <button
+            class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-gray-700 rounded-lg shadow-lg hover:bg-stone-600 focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2 focus:ring-offset-stone-200 mx-3"
+            type="button">
+            download full size
+          </button>
+        </a>
+        <button
+          class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-black rounded-lg shadow-lg hover:bg-stone-700 focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2 focus:ring-offset-stone-200"
+          type="button" (click)="toggleModal()">
+          close
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="showModal" class="opacity-25 fixed inset-0 z-40 bg-black"></div>
+
+<div class="w-full mx-auto px-5 py-6 space-y-5 sm:py-8 md:py-12 sm:space-y-8 md:space-y-16 max-w-7xl">
+  <div class="flex grid grid-cols-12 pb-10 sm:px-5 gap-x-8 gap-y-16">
+    <div class=" flex flex-col items-center col-span-12 space-y-3 sm:col-span-6 xl:col-span-4"
+      *ngFor="let image of images">
+      <a class="block relative select-none cursor-pointer">
+        <img (click)="toggleModal(image)"
+          class="fobject-cove w-full mb-2 overflow-hidden rounded-lg shadow-xl hover:scale-125 transition-all "
+          src="{{image.url}}_m.jpg">
+      </a>
+      <h2 class="text-lg font-bold sm:text-xl md:text-2xl text-center"><a href="#_">{{image.title}}</a></h2>
+      <!-- <p class="text-sm text-gray-500">Learn the attributes you need to gain in order to build a future and create a life that you are truly happy with.</p>
+            <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">Mary Jane</a> · <span class="mx-1">April 17, 2021</span></p> -->
+    </div>
+  </div>
+  <div class="search-results" infiniteScroll [infiniteScrollDistance]="2" [infiniteScrollThrottle]="50"
+    (scrolled)="onScroll()">
+  </div>
+</div>

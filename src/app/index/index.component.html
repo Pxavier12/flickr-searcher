@@ -1,0 +1,23 @@
+
+<div class="flex flex-col gap-y-10 items-center justify-center h-screen">
+    <h1 @openCloseText
+      class="mb-6 text-5xl font-extrabold leading-none max-w-5xl mx-auto tracking-normal text-gray-900 sm:text-6xl md:text-6xl lg:text-7xl md:tracking-tight tails-selected-element"
+      contenteditable="true"> Welcome to&nbsp;<span
+        class="w-full text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 lg:inline">flickr
+        searcher</span>&nbsp;<br></h1>
+
+
+    <form @openClose class="w-full inline-flex space-y-0 justify-center">
+      <div class=" relative ">
+        <input type="search" class="form-control" (keyup)="onInputChange($event)" id="&quot;form-subscribe-Subscribe"
+          class=" shadow-lg rounded-l-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 text-base focus:outline-none focus:ring-2 focus:ring-stone-600 focus:border-transparent"
+          placeholder="search" />
+      </div>
+      <button  (keyup.enter)="onClickSubmit()" (click)="onClickSubmit()"
+        class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-black rounded-r-lg shadow-lg hover:bg-stone-700 focus:outline-none focus:ring-2 focus:ring-stone-500 focus:ring-offset-2 focus:ring-offset-stone-200"
+        type="submit">
+        search
+      </button>
+    </form>
+  </div>
+  
